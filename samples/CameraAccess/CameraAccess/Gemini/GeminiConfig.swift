@@ -37,7 +37,7 @@ enum GeminiConfig {
   static let apiKey = "REDACTED_GEMINI_API_KEY"
 
   // OpenClaw gateway config
-  static let openClawHost = "http://192.168.0.116"
+  static let openClawHost = "http://Xiaoans-MacBook-Pro.local"
   static let openClawPort = 18789
   static let openClawHookToken = "REDACTED_OPENCLAW_HOOK_TOKEN"
   static let openClawGatewayToken = "REDACTED_OPENCLAW_GATEWAY_TOKEN"
