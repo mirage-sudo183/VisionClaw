@@ -40,16 +40,35 @@ enum GeminiConfig {
     For messages, confirm recipient and content before delegating unless clearly urgent.
     """
 
-  static let apiKey = "REDACTED_GEMINI_API_KEY"
+  // ---------------------------------------------------------------
+  // REQUIRED: Add your own Gemini API key here.
+  // Get one at https://aistudio.google.com/apikey
+  // ---------------------------------------------------------------
+  static let apiKey = "YOUR_GEMINI_API_KEY"
 
-  // OpenClaw gateway config
-  static let openClawHost = "http://Xiaoans-MacBook-Pro.local"
+  // ---------------------------------------------------------------
+  // OPTIONAL: OpenClaw gateway config (for agentic tool-calling).
+  // Only needed if you want Gemini to perform actions (web search,
+  // send messages, delegate tasks) via an OpenClaw gateway on your Mac.
+  // See README.md for setup instructions.
+  // ---------------------------------------------------------------
+  static let openClawHost = "http://YOUR_MAC_HOSTNAME.local"
   static let openClawPort = 18789
-  static let openClawHookToken = "REDACTED_OPENCLAW_HOOK_TOKEN"
-  static let openClawGatewayToken = "REDACTED_OPENCLAW_GATEWAY_TOKEN"
+  static let openClawHookToken = "YOUR_OPENCLAW_HOOK_TOKEN"
+  static let openClawGatewayToken = "YOUR_OPENCLAW_GATEWAY_TOKEN"
 
   static func websocketURL() -> URL? {
-    guard !apiKey.isEmpty else { return nil }
+    guard apiKey != "YOUR_GEMINI_API_KEY" && !apiKey.isEmpty else { return nil }
     return URL(string: "\(websocketBaseURL)?key=\(apiKey)")
+  }
+
+  static var isConfigured: Bool {
+    return apiKey != "YOUR_GEMINI_API_KEY" && !apiKey.isEmpty
+  }
+
+  static var isOpenClawConfigured: Bool {
+    return openClawGatewayToken != "YOUR_OPENCLAW_GATEWAY_TOKEN"
+      && !openClawGatewayToken.isEmpty
+      && openClawHost != "http://YOUR_MAC_HOSTNAME.local"
   }
 }

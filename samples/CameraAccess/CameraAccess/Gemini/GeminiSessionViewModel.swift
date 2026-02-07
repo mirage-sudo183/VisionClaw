@@ -22,6 +22,11 @@ class GeminiSessionViewModel: ObservableObject {
   func startSession() async {
     guard !isGeminiActive else { return }
 
+    guard GeminiConfig.isConfigured else {
+      errorMessage = "Gemini API key not configured. Open GeminiConfig.swift and replace YOUR_GEMINI_API_KEY with your key from https://aistudio.google.com/apikey"
+      return
+    }
+
     isGeminiActive = true
 
     // Wire audio callbacks
