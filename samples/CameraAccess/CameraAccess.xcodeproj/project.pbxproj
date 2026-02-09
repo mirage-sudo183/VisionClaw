@@ -38,6 +38,11 @@
 		E6DA451E2E79A63100E3F688 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA45172E79A63100E3F688 /* CardView.swift */; };
 		E6DA451F2E79A63100E3F688 /* MockDeviceKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA451A2E79A63100E3F688 /* MockDeviceKitView.swift */; };
 		E6FD3BCE2EB4D53A00E7FE5D /* NonStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FD3BCD2EB4D53A00E7FE5D /* NonStreamView.swift */; };
+		A7BC0B5C733B43218957E7B0 /* TennisPoseAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC98184A264DD385338E06 /* TennisPoseAnalyzer.swift */; };
+		2F360CE66F9E46EF8AE7EBD8 /* TennisSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B7EF502E447BA91C0389D /* TennisSessionManager.swift */; };
+		8982685E65A24AF497468DAC /* CoachingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79A15614654DA9B74BF52E /* CoachingPolicy.swift */; };
+		AC6CE821E18B45878A12DDCB /* TennisCoachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE089998EAA4B8E9AD52F0C /* TennisCoachViewModel.swift */; };
+		1EBF611EA02A4D55B53874F1 /* TennisCoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A75C831B0AB4DA1979417E0 /* TennisCoachView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,11 @@
 		E6DA45182E79A63100E3F688 /* MockDeviceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceCardView.swift; sourceTree = "<group>"; };
 		E6DA451A2E79A63100E3F688 /* MockDeviceKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceKitView.swift; sourceTree = "<group>"; };
 		E6FD3BCD2EB4D53A00E7FE5D /* NonStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonStreamView.swift; sourceTree = "<group>"; };
+		F4DC98184A264DD385338E06 /* TennisPoseAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisPoseAnalyzer.swift; sourceTree = "<group>"; };
+		F00B7EF502E447BA91C0389D /* TennisSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisSessionManager.swift; sourceTree = "<group>"; };
+		4D79A15614654DA9B74BF52E /* CoachingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingPolicy.swift; sourceTree = "<group>"; };
+		3CE089998EAA4B8E9AD52F0C /* TennisCoachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisCoachViewModel.swift; sourceTree = "<group>"; };
+		5A75C831B0AB4DA1979417E0 /* TennisCoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisCoachView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -184,6 +194,7 @@
 				8FD96B792E6F0A9800F56AB1 /* CameraAccessApp.swift */,
 				8FD96B7B2E6F0A9800F56AB1 /* Info.plist */,
 				9D85EB992F35EC46006C44D1 /* OpenClaw */,
+				99271A53F32142F9B3B01BD0 /* Tennis */,
 			);
 			path = CameraAccess;
 			sourceTree = "<group>";
@@ -229,6 +240,18 @@
 				E66D30232E7DA71900470B48 /* MockDeviceKitButton.swift */,
 			);
 			path = MockDeviceKit;
+			sourceTree = "<group>";
+		};
+		99271A53F32142F9B3B01BD0 /* Tennis */ = {
+			isa = PBXGroup;
+			children = (
+				F4DC98184A264DD385338E06 /* TennisPoseAnalyzer.swift */,
+				F00B7EF502E447BA91C0389D /* TennisSessionManager.swift */,
+				4D79A15614654DA9B74BF52E /* CoachingPolicy.swift */,
+				3CE089998EAA4B8E9AD52F0C /* TennisCoachViewModel.swift */,
+				5A75C831B0AB4DA1979417E0 /* TennisCoachView.swift */,
+			);
+			path = Tennis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +391,11 @@
 				A1B2C3D42F0A000200000003 /* AudioManager.swift in Sources */,
 				A1B2C3D42F0A000200000004 /* GeminiSessionViewModel.swift in Sources */,
 				A1B2C3D42F0A000200000005 /* GeminiOverlayView.swift in Sources */,
+				A7BC0B5C733B43218957E7B0 /* TennisPoseAnalyzer.swift in Sources */,
+				2F360CE66F9E46EF8AE7EBD8 /* TennisSessionManager.swift in Sources */,
+				AC6CE821E18B45878A12DDCB /* TennisCoachViewModel.swift in Sources */,
+				1EBF611EA02A4D55B53874F1 /* TennisCoachView.swift in Sources */,
+				8982685E65A24AF497468DAC /* CoachingPolicy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
