@@ -10,6 +10,10 @@ class GeminiSessionViewModel: ObservableObject {
   @Published var userTranscript: String = ""
   @Published var aiTranscript: String = ""
   @Published var toolCallStatus: ToolCallStatus = .idle
+
+  // Tennis Coach integration
+  var tennisCoachVM: TennisCoachViewModel?
+
   private let geminiService = GeminiLiveService()
   private let openClawBridge = OpenClawBridge()
   private var toolCallRouter: ToolCallRouter?
@@ -61,6 +65,8 @@ class GeminiSessionViewModel: ObservableObject {
       Task { @MainActor in
         self.userTranscript += text
         self.aiTranscript = ""
+        // Forward to tennis coach for voice commands
+        self.tennisCoachVM?.handleVoiceCommand(text)
       }
     }
 

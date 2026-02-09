@@ -21,6 +21,8 @@ struct StreamView: View {
   @ObservedObject var viewModel: StreamSessionViewModel
   @ObservedObject var wearablesVM: WearablesViewModel
   @ObservedObject var geminiVM: GeminiSessionViewModel
+  @ObservedObject var tennisCoachVM: TennisCoachViewModel
+  @State private var showTennisSettings = false
 
   var body: some View {
     ZStack {
@@ -78,12 +80,25 @@ struct StreamView: View {
         .padding(.all, 24)
       }
 
+      // Tennis Coach overlay (glasses mode only)
+      if viewModel.streamingMode == .glasses {
+        TennisCoachOverlayView(viewModel: tennisCoachVM)
+      }
+
       // Bottom controls layer
       VStack {
         Spacer()
-        ControlsView(viewModel: viewModel, geminiVM: geminiVM)
+        ControlsView(
+          viewModel: viewModel,
+          geminiVM: geminiVM,
+          tennisCoachVM: tennisCoachVM,
+          showTennisSettings: $showTennisSettings
+        )
       }
       .padding(.all, 24)
+    }
+    .sheet(isPresented: $showTennisSettings) {
+      TennisCoachControlPanel(viewModel: tennisCoachVM)
     }
     .onDisappear {
       Task {
@@ -122,6 +137,8 @@ struct StreamView: View {
 struct ControlsView: View {
   @ObservedObject var viewModel: StreamSessionViewModel
   @ObservedObject var geminiVM: GeminiSessionViewModel
+  @ObservedObject var tennisCoachVM: TennisCoachViewModel
+  @Binding var showTennisSettings: Bool
 
   var body: some View {
     // Controls row
@@ -143,6 +160,16 @@ struct ControlsView: View {
         }
       }
 
+      // Tennis Coach button (glasses mode only)
+      if viewModel.streamingMode == .glasses {
+        CircleButton(
+          icon: tennisCoachVM.isEnabled ? "figure.tennis" : "figure.stand",
+          text: "🎾"
+        ) {
+          showTennisSettings = true
+        }
+      }
+
       // Gemini AI button
       CircleButton(
         icon: geminiVM.isGeminiActive ? "waveform.circle.fill" : "waveform.circle",
@@ -152,6 +179,9 @@ struct ControlsView: View {
           if geminiVM.isGeminiActive {
             geminiVM.stopSession()
           } else {
+            // Enable tennis mode if tennis coach is enabled
+            GeminiConfig.isTennisCoachMode = tennisCoachVM.isEnabled
+            geminiVM.streamingMode = viewModel.streamingMode
             await geminiVM.startSession()
           }
         }

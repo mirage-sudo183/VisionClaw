@@ -50,6 +50,9 @@ class StreamSessionViewModel: ObservableObject {
   // Gemini Live integration
   var geminiSessionVM: GeminiSessionViewModel?
 
+  // Tennis Coach integration (only active in glasses mode)
+  var tennisCoachVM: TennisCoachViewModel?
+
   // The core DAT SDK StreamSession - handles all streaming operations
   private var streamSession: StreamSession
   // Listener tokens are used to manage DAT SDK event subscriptions
@@ -100,6 +103,11 @@ class StreamSessionViewModel: ObservableObject {
           }
           // Forward video frames to Gemini Live (throttled internally to ~1fps)
           self.geminiSessionVM?.sendVideoFrameIfThrottled(image: image)
+
+          // Forward to Tennis Coach for pose analysis (glasses mode only)
+          if self.streamingMode == .glasses {
+            self.tennisCoachVM?.processVideoFrame(image)
+          }
         }
       }
     }
@@ -110,6 +118,23 @@ class StreamSessionViewModel: ObservableObject {
       Task { @MainActor [weak self] in
         guard let self else { return }
         let newErrorMessage = formatStreamingError(error)
+        NSLog("[Stream] Error: %@", newErrorMessage)
+
+        // Handle reconnectable errors gracefully
+        switch error {
+        case .deviceNotConnected, .deviceNotFound:
+          // Attempt to wait for device reconnection rather than showing error immediately
+          NSLog("[Stream] Device disconnected, waiting for reconnection...")
+          self.streamingStatus = .waiting
+          return
+        case .hingesClosed:
+          NSLog("[Stream] Hinges closed, pausing stream")
+          self.streamingStatus = .waiting
+          return
+        default:
+          break
+        }
+
         if newErrorMessage != self.errorMessage {
           showError(newErrorMessage)
         }

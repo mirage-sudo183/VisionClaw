@@ -12,6 +12,51 @@ enum GeminiConfig {
   static let videoFrameInterval: TimeInterval = 1.0
   static let videoJPEGQuality: CGFloat = 0.5
 
+  // Tennis Coach Mode
+  static var isTennisCoachMode: Bool = false
+
+  static var activeSystemInstruction: String {
+    isTennisCoachMode ? tennisCoachSystemInstruction : systemInstruction
+  }
+
+  static let tennisCoachSystemInstruction = """
+    You are a high-performance tennis coach. You see through smart glasses with LIMITED visual fidelity.
+
+    CRITICAL CONSTRAINTS:
+    - The camera often does NOT see the racket clearly. You MUST NOT comment on racket mechanics.
+    - Design your feedback around BODY POSE, TIMING, MOVEMENT, and TACTICS only.
+    - Vision quality is low-FPS, wide-angle, and compressed.
+    - If confidence is low, stay SILENT or say "I'm not sure yet."
+
+    COACHING RULES:
+    - Speak ONE thing at a time. Max 1 sentence.
+    - Never speak more than once every 20 seconds.
+    - Prefer silence over guessing.
+    - Focus on: footwork, spacing, balance, preparation timing, recovery, tactical positioning.
+
+    NEVER comment on:
+    - Racket face angle
+    - Grip
+    - Wrist action
+    - Contact point specifics
+    - Swing path details
+
+    ALLOWED cues (examples):
+    - "Give yourself more space from the ball."
+    - "Turn earlier before the bounce."
+    - "Recover faster after the shot."
+    - "Bend your knees—stay athletic."
+    - "Opponent is staying deep—use depth."
+
+    When a tennis session starts, ask ONCE: "Movement, forehand, backhand, or serve focus today?"
+
+    When the session ends, give a brief spoken summary of 2-3 observations and suggest one drill.
+
+    You have the execute tool to delegate tasks to a personal assistant if needed (e.g., "save this session summary").
+
+    Remember: You are a supportive coach. Be calm, brief, and helpful.
+    """
+
   static let systemInstruction = """
     You are an AI assistant for someone wearing Meta Ray-Ban smart glasses. You can see through their camera and have a voice conversation. Keep responses concise and natural.
 
@@ -44,7 +89,7 @@ enum GeminiConfig {
   // REQUIRED: Add your own Gemini API key here.
   // Get one at https://aistudio.google.com/apikey
   // ---------------------------------------------------------------
-  static let apiKey = "YOUR_GEMINI_API_KEY"
+  static let apiKey = "YOUR_GEMINI_API_KEY"  // <-- You still need to add this from https://aistudio.google.com/apikey
 
   // ---------------------------------------------------------------
   // OPTIONAL: OpenClaw gateway config (for agentic tool-calling).
@@ -52,10 +97,10 @@ enum GeminiConfig {
   // send messages, delegate tasks) via an OpenClaw gateway on your Mac.
   // See README.md for setup instructions.
   // ---------------------------------------------------------------
-  static let openClawHost = "http://YOUR_MAC_HOSTNAME.local"
+  static let openClawHost = "http://Altans-Mac-Studio.local"
   static let openClawPort = 18789
-  static let openClawHookToken = "YOUR_OPENCLAW_HOOK_TOKEN"
-  static let openClawGatewayToken = "YOUR_OPENCLAW_GATEWAY_TOKEN"
+  static let openClawHookToken = "94d4d398de0daca724e703eca26291ce1a62416e87b70736"
+  static let openClawGatewayToken = "94d4d398de0daca724e703eca26291ce1a62416e87b70736"
 
   static func websocketURL() -> URL? {
     guard apiKey != "YOUR_GEMINI_API_KEY" && !apiKey.isEmpty else { return nil }
